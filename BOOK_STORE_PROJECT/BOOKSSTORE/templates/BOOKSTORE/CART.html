@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOUR CART</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .cart-item { border: 1px solid #ccc; padding: 10px; margin: 10px; border-radius: 10px; }
+        a.button { display: inline-block; background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>YOUR CART</h2>
+    <a class="button" href="{% url 'BOOK_LIST' %}">BACK TO BOOKSTORE</a>
+    {% for book in books %}
+    <div class="cart-item">
+        <h4>{{ book.title }}</h4>
+        <p>{{ book.author }}</p>
+        <p>${{ book.price }}</p>
+    </div>
+    {% empty %}
+    <p>YOUR CART IS EMPTY!</p>
+    {% endfor %}
+</body>
+</html>

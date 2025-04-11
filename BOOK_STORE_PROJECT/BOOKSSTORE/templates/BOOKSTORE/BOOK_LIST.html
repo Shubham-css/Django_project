@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BOOKSTORE</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .book { border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 10px; }
+        .book img { max-width: 100px; }
+        .book button { background-color: #28a745; color: white; padding: 5px 10px; border: none; }
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO THE BOOKSTORE</h1>
+    {% if user.is_authenticated %}
+        <p>HELLO, {{ user.username }} | <a href="{% url 'LOGOUT' %}">LOGOUT</a> | <a href="{% url 'VIEW_CART' %}">CART</a></p>
+    {% else %}
+        <a href="{% url 'LOGIN' %}">LOGIN</a>
+    {% endif %}
+    <div>
+        {% for book in books %}
+        <div class="book">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+            <p>${{ book.price }}</p>
+            <p>{{ book.description }}</p>
+            <img src="{{ book.image }}" alt="Book cover">
+            <br>
+            <a href="{% url 'ADD_TO_CART' book.id %}"><button>ADD TO CART</button></a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
